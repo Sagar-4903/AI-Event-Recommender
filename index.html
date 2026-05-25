@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Event Recommender | Student Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar" aria-label="Student navigation">
+    <div class="brand">
+      <div class="brand-mark">AI</div>
+      <div>
+        <p>Event Recommender</p>
+        <span>Student Portal</span>
+      </div>
+    </div>
+
+    <nav class="nav-list">
+      <a class="nav-item active" href="#dashboard" aria-label="Dashboard">
+        <span class="nav-icon">D</span>
+        Dashboard
+      </a>
+      <a class="nav-item" href="#recommendations" aria-label="Recommendations">
+        <span class="nav-icon">A</span>
+        AI Picks
+      </a>
+      <a class="nav-item" href="#interests" aria-label="Interests">
+        <span class="nav-icon">I</span>
+        Interests
+      </a>
+      <a class="nav-item" href="#schedule" aria-label="Schedule">
+        <span class="nav-icon">S</span>
+        Schedule
+      </a>
+      <a class="nav-item" href="#profile" aria-label="Profile">
+        <span class="nav-icon">P</span>
+        Profile
+      </a>
+    </nav>
+  </aside>
+
+  <main class="page-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Student dashboard</p>
+        <h1>Find the right events faster.</h1>
+      </div>
+      <div class="student-card">
+        <div class="avatar">SK</div>
+        <div>
+          <strong>Sagar Kumar</strong>
+          <span>Computer Science</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero-panel" id="dashboard">
+      <div class="hero-copy">
+        <p class="status-chip">Recommendation engine ready</p>
+        <h2>Personalized event matches based on skills, interests, and schedule.</h2>
+        <p>
+          Add recommender features here step by step: interest matching, ranking score,
+          calendar fit, registration status, and feedback learning.
+        </p>
+        <div class="hero-actions">
+          <button class="primary-btn" type="button" id="refreshRecommendations">Generate Picks</button>
+          <button class="secondary-btn" type="button">Edit Interests</button>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Event match preview">
+        <div class="score-ring">
+          <span>92%</span>
+          <small>Top match</small>
+        </div>
+        <div class="mini-card card-one">
+          <strong>AI Hackathon</strong>
+          <span>Machine learning | 2 days</span>
+        </div>
+        <div class="mini-card card-two">
+          <strong>Cloud Workshop</strong>
+          <span>Beginner friendly | Online</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-grid" aria-label="Dashboard summary">
+      <article>
+        <span>Recommended</span>
+        <strong>12</strong>
+        <p>Events matched today</p>
+      </article>
+      <article>
+        <span>Registered</span>
+        <strong>4</strong>
+        <p>Upcoming events</p>
+      </article>
+      <article>
+        <span>Skill Fit</span>
+        <strong>86%</strong>
+        <p>Average match score</p>
+      </article>
+      <article>
+        <span>Saved</span>
+        <strong>7</strong>
+        <p>Events in shortlist</p>
+      </article>
+    </section>
+
+    <section class="content-grid">
+      <div class="panel recommendations-panel" id="recommendations">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">AI picks</p>
+            <h3>Recommended Events</h3>
+          </div>
+          <select id="eventFilter" aria-label="Filter recommended events">
+            <option value="all">All events</option>
+            <option value="technical">Technical</option>
+            <option value="career">Career</option>
+            <option value="creative">Creative</option>
+          </select>
+        </div>
+
+        <div class="event-list" id="eventList"></div>
+      </div>
+
+      <div class="panel" id="interests">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Profile signal</p>
+            <h3>Interest Tags</h3>
+          </div>
+          <button class="icon-btn" type="button" aria-label="Add interest">+</button>
+        </div>
+        <div class="tags">
+          <button type="button">AI / ML</button>
+          <button type="button">Web Dev</button>
+          <button type="button">Startups</button>
+          <button type="button">Cloud</button>
+          <button type="button">Public Speaking</button>
+          <button type="button">Design</button>
+        </div>
+
+        <div class="feature-slots">
+          <h4>Next features</h4>
+          <ul>
+            <li>Student interest form</li>
+            <li>AI score calculation</li>
+            <li>Event registration flow</li>
+            <li>Feedback based learning</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-grid lower-grid">
+      <div class="panel" id="schedule">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Calendar</p>
+            <h3>Upcoming Schedule</h3>
+          </div>
+        </div>
+        <div class="timeline">
+          <div>
+            <time>May 28</time>
+            <strong>Resume Building Session</strong>
+            <span>Auditorium B | 11:00 AM</span>
+          </div>
+          <div>
+            <time>Jun 02</time>
+            <strong>AI Hackathon Round 1</strong>
+            <span>Lab 4 | 9:30 AM</span>
+          </div>
+          <div>
+            <time>Jun 08</time>
+            <strong>Cloud Basics Workshop</strong>
+            <span>Online | 7:00 PM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="profile">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Readiness</p>
+            <h3>Student Profile</h3>
+          </div>
+        </div>
+        <div class="profile-meter">
+          <div class="meter-line">
+            <span style="width: 78%"></span>
+          </div>
+          <strong>78% complete</strong>
+          <p>Add skills, preferred event types, location, and availability to improve recommendations.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
