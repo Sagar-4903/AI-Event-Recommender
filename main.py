@@ -46,8 +46,8 @@ allowed_origins = [
     origin.strip()
     for origin in os.getenv(
         "FRONTEND_ORIGINS",
-        "http://localhost:3000,http://localhost:5173,http://localhost:5174,"
-        "http://127.0.0.1:3000,http://127.0.0.1:5173,http://127.0.0.1:5174",
+        "http://localhost:3000,http://localhost:5173,http://localhost:5174,http://localhost:5500,"
+        "http://127.0.0.1:3000,http://127.0.0.1:5173,http://127.0.0.1:5174,http://127.0.0.1:5500",
     ).split(",")
     if origin.strip()
 ]
@@ -64,10 +64,16 @@ app.add_middleware(
 class UserPreferences(BaseModel):
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
 
+    student_email: EmailStr | None = None
     branch: str = Field(..., min_length=1, max_length=120)
     event_types: list[str] = Field(..., min_length=1)
     location: str = Field(..., min_length=1, max_length=160)
     domain: str = Field(..., min_length=1, max_length=160)
+    tags: list[str] = Field(default_factory=list)
+
+
+class StudentProfile(UserPreferences):
+    full_name: str | None = Field(default=None, max_length=160)
 
 
 class TeamRegistration(BaseModel):
@@ -141,6 +147,30 @@ Active events:
 @app.get("/health")
 def health_check() -> dict[str, str]:
     return {"status": "ok"}
+
+
+@app.post("/api/student-profile")
+def save_student_profile(profile: StudentProfile) -> dict[str, str]:
+    row = jsonable_encoder(profile.model_dump())
+
+    try:
+        if profile.student_email:
+            supabase.table("student_profiles").upsert(
+                row,
+                on_conflict="student_email",
+            ).execute()
+        else:
+            supabase.table("student_profiles").insert(row).execute()
+    except Exception as exc:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to save student profile in Supabase: {exc}",
+        ) from exc
+
+    return {
+        "status": "success",
+        "message": "Student profile preferences saved successfully.",
+    }
 
 
 @app.post("/api/recommend-events")
